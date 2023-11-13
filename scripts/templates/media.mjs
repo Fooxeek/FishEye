@@ -1,8 +1,8 @@
 import { openLightbox } from "../utils/lightbox.mjs";
 
 export default function mediaTemplate(data, photographerName) {
-  const { id, name, photographerId, title, image, video, likes, date, price } =
-    data;
+  const { title, image, video, likes } = data;
+
   const imagePath = `../../assets/images/${photographerName.replace(
     /\s+/g,
     "_"
@@ -11,7 +11,6 @@ export default function mediaTemplate(data, photographerName) {
     /\s+/g,
     "_"
   )}/${video}`;
-
   function getMediaDOM() {
     const flex = document.createElement("div");
     flex.classList.add("media");

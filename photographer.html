@@ -8,6 +8,7 @@
       href="https://fonts.googleapis.com/css?family=DM+Sans&display=swap"
       rel="stylesheet"
     />
+
     <title>Fisheye - photographe</title>
   </head>
   <body>
@@ -23,89 +24,114 @@
         </button>
       </div>
       <div id="lightbox" aria-label="imagecloseup">
-        <span class="close"
-          ><svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="72"
-            height="72"
-            viewBox="0 0 72 72"
-            fill="none"
-          >
-            <g clip-path="url(#clip0_120_794)">
-              <path
-                d="M57 19.23L52.77 15L36 31.77L19.23 15L15 19.23L31.77 36L15 52.77L19.23 57L36 40.23L52.77 57L57 52.77L40.23 36L57 19.23Z"
-                fill="#911C1C"
-              />
-            </g>
-            <defs>
-              <clipPath id="clip0_120_794">
-                <rect width="72" height="72" fill="white" />
-              </clipPath>
-            </defs>
-          </svg>
-        </span>
-        <div id="lightbox-nav-left" class="lightbox-nav">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="96"
-            height="96"
-            viewBox="0 0 96 96"
-            fill="none"
-          >
-            <g clip-path="url(#clip0_120_800)">
-              <path
-                d="M61.6399 66.36L43.3199 48L61.6399 29.64L55.9999 24L31.9999 48L55.9999 72L61.6399 66.36Z"
-                fill="#911C1C"
-              />
-            </g>
-            <defs>
-              <clipPath id="clip0_120_800">
-                <rect
-                  width="96"
-                  height="96"
-                  fill="white"
-                  transform="translate(96) rotate(90)"
+        <div class="lightbox-container">
+          <span class="close"
+            ><svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="72"
+              height="72"
+              viewBox="0 0 72 72"
+              fill="none"
+            >
+              <g clip-path="url(#clip0_120_794)">
+                <path
+                  d="M57 19.23L52.77 15L36 31.77L19.23 15L15 19.23L31.77 36L15 52.77L19.23 57L36 40.23L52.77 57L57 52.77L40.23 36L57 19.23Z"
+                  fill="#911C1C"
                 />
-              </clipPath>
-            </defs>
-          </svg>
-        </div>
-        <img id="lightbox-img" />
-        <div id="lightbox-nav-right" class="lightbox-nav">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="96"
-            height="96"
-            viewBox="0 0 96 96"
-            fill="none"
-          >
-            <g clip-path="url(#clip0_120_803)">
-              <path
-                d="M34.3601 29.64L52.6801 48L34.3601 66.36L40.0001 72L64.0001 48L40.0001 24L34.3601 29.64Z"
-                fill="#911C1C"
-              />
-            </g>
-            <defs>
-              <clipPath id="clip0_120_803">
-                <rect
-                  width="96"
-                  height="96"
-                  fill="white"
-                  transform="translate(0 96) rotate(-90)"
+              </g>
+              <defs>
+                <clipPath id="clip0_120_794">
+                  <rect width="72" height="72" fill="white" />
+                </clipPath>
+              </defs>
+            </svg>
+          </span>
+          <div id="lightbox-nav-left" class="lightbox-nav">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="96"
+              height="96"
+              viewBox="0 0 96 96"
+              fill="none"
+            >
+              <g clip-path="url(#clip0_120_800)">
+                <path
+                  d="M61.6399 66.36L43.3199 48L61.6399 29.64L55.9999 24L31.9999 48L55.9999 72L61.6399 66.36Z"
+                  fill="#911C1C"
                 />
-              </clipPath>
-            </defs>
-          </svg>
+              </g>
+              <defs>
+                <clipPath id="clip0_120_800">
+                  <rect
+                    width="96"
+                    height="96"
+                    fill="white"
+                    transform="translate(96) rotate(90)"
+                  />
+                </clipPath>
+              </defs>
+            </svg>
+          </div>
+          <img id="lightbox-img" />
+          <div id="lightbox-nav-right" class="lightbox-nav">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="96"
+              height="96"
+              viewBox="0 0 96 96"
+              fill="none"
+            >
+              <g clip-path="url(#clip0_120_803)">
+                <path
+                  d="M34.3601 29.64L52.6801 48L34.3601 66.36L40.0001 72L64.0001 48L40.0001 24L34.3601 29.64Z"
+                  fill="#911C1C"
+                />
+              </g>
+              <defs>
+                <clipPath id="clip0_120_803">
+                  <rect
+                    width="96"
+                    height="96"
+                    fill="white"
+                    transform="translate(0 96) rotate(-90)"
+                  />
+                </clipPath>
+              </defs>
+            </svg>
+          </div>
         </div>
       </div>
       <div class="media">
         <div class="sorting">
           <p>Trier par</p>
-          <select name="media" id="media-select" class="media-select">
-            <option class="media-option" value="popularity">Popularité</option>
-            <option class="media-option" value="date">Date</option>
-            <option class="media-option" value="title">Titre</option>
-          </select>
+          <div id="media-select">
+            <button
+              class="sortby-select__button"
+              role="button"
+              aria-haspopup="listbox"
+              data-id="popularity"
+            >
+              Popularité <i class="fas fa-chevron-up"></i>
+            </button>
+            <div class="sortby-select-panel">
+              <button
+                class="sortby-select__option button"
+                role="listbox"
+                aria-labelledby="dropdown"
+                data-id="date"
+              >
+                Date
+              </button>
+              <button
+                class="sortby-select__option button"
+                role="listbox"
+                aria-labelledby="dropdown"
+                data-id="title"
+              >
+                Titre
+              </button>
+            </div>
+          </div>
         </div>
       </div>
     </main>

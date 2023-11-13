@@ -3,6 +3,8 @@ import {
   getPhotographerDetails,
 } from "../pages/photographer.mjs";
 
+import mediaTemplate from "../templates/media.mjs";
+
 // Objet de configuration pour le tri
 const sortOptions = {
   popularity: (a, b) => b.likes - a.likes,
@@ -16,37 +18,75 @@ async function filterMedia(option) {
   const { media } = await getPhotographerDetails(photographerId);
 
   // Utilisez l'option sélectionnée pour trier les médias et renvoyez le tableau trié
-  console.log(media);
+
   return media.sort(sortOptions[option]);
 }
 
-// Sélectionnez le sélecteur par son ID
-var mediaSelect = document.getElementById("media-select");
+const firstButton = document.querySelector(".sortby-select__button");
+const panel = document.querySelector(".sortby-select-panel");
+const icone = document.querySelector(".fa-chevron-up");
 
-// Par défaut, l'option "Popularité" est retirée
-var defaultSelectedValue = "popularity";
-mediaSelect.value = defaultSelectedValue;
+let result;
+firstButton.addEventListener("click", function () {
+  result = panel.classList.toggle("flex");
+  if (result) {
+    firstButton.setAttribute("aria-expanded", "true");
+    icone.classList.add("rotate");
+  } else {
+    firstButton.setAttribute("aria-expanded", "false");
+    icone.classList.remove("rotate");
+  }
+});
 
-// Masquez l'option "Popularité" par défaut
-var popularityOption = document.querySelector(
-  ".media-option[value='popularity']"
-);
-popularityOption.style.display = "none";
-
-// Écoutez les changements d'options
-mediaSelect.addEventListener("change", function () {
-  // Récupérez la valeur sélectionnée
-  var selectedValue = mediaSelect.value;
-
-  // Parcourez toutes les options et retirez l'option sélectionnée
-  var options = document.querySelectorAll(".media-option");
-  options.forEach(function (option) {
-    if (option.value === selectedValue) {
-      option.style.display = "none"; // Retirez l'option sélectionnée en la masquant
+const sortButtons = document.querySelectorAll(".sortby-select__option");
+function updateSortButtons(selectedOption) {
+  sortButtons.forEach((button) => {
+    const option = button.getAttribute("data-id");
+    if (option === selectedOption) {
+      button.setAttribute("aria-selected", "true");
+      button.classList.add("selected");
     } else {
-      option.style.display = "block"; // Affichez les autres options
+      button.setAttribute("aria-selected", "false");
+      button.classList.remove("selected");
     }
   });
+}
+
+sortButtons.forEach((button) => {
+  button.addEventListener("click", async function () {
+    const option = button.getAttribute("data-id");
+    const sortedMedia = await filterMedia(option);
+    renderMedia(sortedMedia, option);
+    updateSortButtons(option);
+
+    // Swap label and data-id for the first button
+    const firstButtonLabel = firstButton.textContent;
+    const firstButtonDataId = firstButton.getAttribute("data-id");
+
+    // Update the first button with the icon
+    firstButton.innerHTML = `${button.textContent} <i class="fas fa-chevron-up rotate"></i>`;
+    firstButton.setAttribute("data-id", option);
+
+    // Update the clicked button with the icon
+    button.innerHTML = `${firstButtonLabel}`;
+    button.setAttribute("data-id", firstButtonDataId);
+  });
 });
+
+async function renderMedia(media) {
+  const photographerId = await getPhotographerIdFromUrl();
+  const { photographer } = await getPhotographerDetails(photographerId);
+  // Assuming you have a container for your media elements with the class "media-container"
+  const mediaContainer = document.querySelector(".photograph-flex");
+
+  // Clear existing media elements
+  mediaContainer.innerHTML = "";
+
+  // Iterate through the sorted media and append them to the container
+  media.forEach((mediaItem) => {
+    const mediaDOM = mediaTemplate(mediaItem, photographer.name);
+    mediaContainer.appendChild(mediaDOM.getMediaDOM());
+  });
+}
 
 export { sortOptions, filterMedia };
