@@ -64,7 +64,7 @@ sortButtons.forEach((button) => {
     const firstButtonDataId = firstButton.getAttribute("data-id");
 
     // Update the first button with the icon
-    firstButton.innerHTML = `${button.textContent} <i class="fas fa-chevron-down rotate"></i>`;
+    firstButton.innerHTML = `${button.textContent}`;
     firstButton.setAttribute("data-id", option);
 
     // Update the clicked button with the icon
