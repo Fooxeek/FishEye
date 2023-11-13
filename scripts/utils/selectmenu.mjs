@@ -24,7 +24,7 @@ async function filterMedia(option) {
 
 const firstButton = document.querySelector(".sortby-select__button");
 const panel = document.querySelector(".sortby-select-panel");
-const icone = document.querySelector(".fa-chevron-up");
+const icone = document.querySelector(".fa-chevron-down");
 
 let result;
 firstButton.addEventListener("click", function () {
@@ -64,7 +64,7 @@ sortButtons.forEach((button) => {
     const firstButtonDataId = firstButton.getAttribute("data-id");
 
     // Update the first button with the icon
-    firstButton.innerHTML = `${button.textContent} <i class="fas fa-chevron-up rotate"></i>`;
+    firstButton.innerHTML = `${button.textContent} <i class="fas fa-chevron-down rotate"></i>`;
     firstButton.setAttribute("data-id", option);
 
     // Update the clicked button with the icon
