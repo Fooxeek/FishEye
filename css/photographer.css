@@ -292,6 +292,7 @@ video {
 
 .contact_button:hover {
   background-color: #d3573c;
+  color: #000000;
 }
 
 .modal {
