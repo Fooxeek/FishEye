@@ -1,7 +1,8 @@
 import { openLightbox } from "../utils/lightbox.mjs";
 
 export default function mediaTemplate(data, photographerName) {
-  const { title, image, video, likes } = data;
+  const { title, image, video } = data;
+  let { likes } = data;
 
   const imagePath = `../../assets/images/${photographerName.replace(
     /\s+/g,
@@ -41,7 +42,14 @@ export default function mediaTemplate(data, photographerName) {
     informationElement.appendChild(titleElement);
 
     const likesElement = document.createElement("p");
+    likesElement.classList.add("likes");
     likesElement.innerHTML = `${likes} <i class="fas fa-heart"></i>`;
+    likesElement.addEventListener("click", () => {
+      // Incrémente le nombre de likes lorsque le cœur est cliqué
+      likes++;
+      likesElement.innerHTML = `${likes} <i class="fas fa-heart"></i>`;
+    });
+
     informationElement.appendChild(likesElement);
 
     // Ajoutez informationElement à flex
