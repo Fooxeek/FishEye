@@ -1,4 +1,5 @@
 import { openLightbox } from "../utils/lightbox.mjs";
+import { updateTotalLikes } from "../utils/totalLikes.mjs";
 
 export default function mediaTemplate(data, photographerName) {
   const { title, image, video } = data;
@@ -48,6 +49,7 @@ export default function mediaTemplate(data, photographerName) {
       // Incrémente le nombre de likes lorsque le cœur est cliqué
       likes++;
       likesElement.innerHTML = `${likes} <i class="fas fa-heart"></i>`;
+      updateTotalLikes(1);
     });
 
     informationElement.appendChild(likesElement);

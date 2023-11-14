@@ -1,5 +1,6 @@
 import mediaTemplate from "../templates/media.mjs";
 import { filterMedia } from "../utils/selectmenu.mjs";
+import { LikesAndPrice } from "../utils/LikeAndPrice.mjs";
 
 export async function getPhotographers() {
   try {
@@ -114,6 +115,7 @@ async function loadPhotographerDetails() {
 
       const mediaSelect = document.getElementById("media-select");
 
+      LikesAndPrice(media, photographer);
       // Ajoutez un gestionnaire d'événements change à l'élément <select>
       mediaSelect.addEventListener("change", async function () {
         // Obtenez la valeur de l'option sélectionnée
@@ -140,19 +142,6 @@ async function loadPhotographerDetails() {
           // Gérez l'erreur selon vos besoins
         }
       });
-
-      // Calculer le total des likes
-      const totalLikes = media.reduce((acc, currentMedia) => {
-        return acc + currentMedia.likes;
-      }, 0);
-      // Récupérer le prix du photographe
-      const photographerPrice = photographer.price;
-
-      // Créez un élément pour afficher le prix du photographe et le total des likes
-      const photographPriceAndlikes = document.createElement("p");
-      photographPriceAndlikes.innerHTML = `<span> ${totalLikes} <i class="fas fa-heart" aria-label="likes"></i></span> <span> ${photographerPrice}€ / jour </span>`;
-      photographPriceAndlikes.classList.add("information");
-      main.appendChild(photographPriceAndlikes);
     } else {
       console.log("Aucun photographe trouvé avec cet ID.");
     }
