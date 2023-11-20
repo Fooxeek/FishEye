@@ -8,6 +8,13 @@ export function openLightbox() {
 
   let currentIndex = 0;
 
+  function setInitialFocus() {
+    const firstInteractiveElement = document.getElementsByClassName("close")[0];
+    if (firstInteractiveElement) {
+      firstInteractiveElement.focus();
+    }
+  }
+
   // to open lightbox
   flexImages.forEach((img, index) => {
     img.addEventListener("click", () => {
@@ -16,6 +23,7 @@ export function openLightbox() {
       lightboxImg.src = img.src;
 
       lightbox.setAttribute("aria-label", "imagecloseup view");
+      setInitialFocus();
     });
   });
 
@@ -28,8 +36,15 @@ export function openLightbox() {
   // To close lightbox when clicking on the close button
   closeBtn.addEventListener("click", () => {
     lightbox.classList.remove("active");
-
     lightbox.setAttribute("aria-label", "imagecloseup");
+  });
+
+  // Close lightbox on "Enter" key press for close button
+  closeBtn.addEventListener("keydown", (event) => {
+    if (event.key === "Enter") {
+      lightbox.classList.remove("active");
+      lightbox.setAttribute("aria-label", "imagecloseup");
+    }
   });
 
   // Navigate to the previous media
@@ -40,6 +55,19 @@ export function openLightbox() {
   // Navigate to the next media
   navRight.addEventListener("click", () => {
     showMedia(currentIndex + 1);
+  });
+
+  // Close lightbox on "Enter" key press for navigation buttons
+  navLeft.addEventListener("keydown", (event) => {
+    if (event.key === "Enter") {
+      showMedia(currentIndex - 1);
+    }
+  });
+
+  navRight.addEventListener("keydown", (event) => {
+    if (event.key === "Enter") {
+      showMedia(currentIndex + 1);
+    }
   });
 
   // To close lightbox when clicking outside the media

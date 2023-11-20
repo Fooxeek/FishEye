@@ -21,5 +21,28 @@ function closeModal() {
   modal.style.display = "none";
 }
 
+function handleSubmit(event) {
+  event.preventDefault();
+
+  const firstName = document.getElementById("first_name").value;
+  const lastName = document.getElementById("last_name").value;
+  const email = document.getElementById("email").value;
+  const message = document.getElementById("your_message").value;
+
+  if (!firstName || !lastName || !email || !message) {
+    alert("Veuillez renseigner tous les champs du formulaire.");
+    return;
+  }
+
+  console.log("Prénom/Nom:", firstName, lastName);
+  console.log("Email:", email);
+  console.log("Message:", message);
+
+  closeModal();
+}
+
+const contactForm = document.querySelector("form");
+contactForm.addEventListener("submit", handleSubmit);
+
 window.displayModal = displayModal;
 window.closeModal = closeModal;
