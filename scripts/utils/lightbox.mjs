@@ -70,6 +70,15 @@ export function openLightbox() {
     }
   });
 
+  // Navigate with arrow keys
+  lightbox.addEventListener("keydown", (event) => {
+    if (event.key === "ArrowLeft") {
+      showMedia(currentIndex - 1);
+    } else if (event.key === "ArrowRight") {
+      showMedia(currentIndex + 1);
+    }
+  });
+
   // To close lightbox when clicking outside the media
   lightbox.addEventListener("click", (e) => {
     if (e.target !== e.currentTarget) return;
